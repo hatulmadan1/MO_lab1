@@ -4,16 +4,16 @@ using System.Text;
 
 namespace MO_lab1
 {
-    public class DichotomyMethod
+    public class DichotomyMethod : OptMethod
     {
-        public static (double, double) Execute(TestCase data)
+        public override (double, double) Execute(TestCase data)
         {
             double delta = data.Epsilon * 0.49;
             double start = data.Start, end = data.End;
             double length = end - start;
             Console.WriteLine($"{Math.Log2((data.End - data.Start) / data.Epsilon)} Start End x1 x2 f1 f2 l2/l1");
             int i = 0;
-            while (Math.Round(end - start, 4) > data.Epsilon)
+            while (Math.Round(end - start, GetPrecision(data.Epsilon)) > data.Epsilon)
             {
                 double x1 = (start + end) / 2 - delta;
                 double x2 = (start + end) / 2 + delta;

@@ -56,7 +56,7 @@ namespace MO_lab1
 
             foreach (var t in test)
             {
-                Console.WriteLine(DichotomyMethod.Execute(t));
+                Console.WriteLine(new DichotomyMethod().Execute(t));
             }
 
             Console.WriteLine("GoldenRatio");
