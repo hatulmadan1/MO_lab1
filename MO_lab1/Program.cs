@@ -7,10 +7,10 @@ namespace MO_lab1
     {
         static void Main(string[] args)
         {
-            const double eps = 0.0001;
+            const double eps = 0.025;
 
             List<TestCase> test = new List<TestCase>(){
-
+                
             new TestCase()
             {
                 Start = -0.5,
@@ -49,7 +49,15 @@ namespace MO_lab1
                 End = 2.5,
                 Epsilon = eps,
                 Function = x => (0.2 * x * Math.Log10(x) + Math.Pow(x - 2.3, 2))
-            }
+            },
+
+            /*new TestCase()
+            {
+                Start = -101,
+                End = 20,
+                Epsilon = 0.0025,
+                Function = Math.Abs
+            }*/
             };
 
             Console.WriteLine("Dichotomy");
@@ -59,25 +67,25 @@ namespace MO_lab1
                 Console.WriteLine(new DichotomyMethod().Execute(t));
             }
 
-            Console.WriteLine("GoldenRatio");
+            Console.WriteLine("\nGoldenRatio");
 
             foreach (var t in test)
             {
-                Console.WriteLine(GoldenRatioMethod.Execute(t));
+                Console.WriteLine(new GoldenRatioMethod().Execute(t));
             }
 
-            Console.WriteLine("Fibonacci");
+            Console.WriteLine("\nFibonacci");
 
             foreach (var t in test)
             {
-                Console.WriteLine(FibonacciMethod.Execute(t));
+                Console.WriteLine(new FibonacciMethod().Execute(t));
             }
 
-            Console.WriteLine("Parabolic");
+            Console.WriteLine("\nParabolic");
 
             foreach (var t in test)
             {
-                Console.WriteLine(ParabolicMethod.Execute(t));
+                Console.WriteLine(new ParabolicMethod().Execute(t));
             }
         }
     }
