@@ -23,7 +23,7 @@ namespace MO_lab1
 
                 double fu = data.Function.Invoke(u);
 
-                Console.Write($"{i++}) {x1:F6} {x3:F6} {u:F6} {fu:F6} ");
+                Console.Write($"{i++,2}{")",-1} {x1:F8} {x2:F8} {x3:F8} {u:F8} {fu:F8} ");
 
                 if (u > x2)
                 {

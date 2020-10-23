@@ -21,7 +21,7 @@ namespace MO_lab1
             double f1 = data.Function.Invoke(x1), f2 = data.Function.Invoke(x2);
             int k = 1;
 
-            Console.WriteLine($"\n{n:F} Start   End     New x    New f(x)   l2/l1");
+            Console.WriteLine($"\n{n,2:F0} {"Start",10} {"End",9} {"New x",9} {"New f(x)",9} {"l2/l1",9}");
             int i_ = 0;
             int precision = GetPrecision(data.Epsilon);
 
@@ -33,8 +33,8 @@ namespace MO_lab1
                     x1 = x2;
                     f1 = f2;
 
-                    Console.Write($"{i_++}) {start:F6} {end:F6} {x2:F6} {f2:F6} ");
-                    Console.WriteLine($"{(length / (end - start)):F6}");
+                    double l = (length / (end - start));
+                    
 
                     length = end - start;
                     x2 = start + (fibNumbers[n - k - 1] / fibNumbers[n - k]) * length;
@@ -42,6 +42,8 @@ namespace MO_lab1
                     {
                         f2 = data.Function.Invoke(x2);
                     }
+                    Console.Write($"{i_++,2}{")",-1} {start,9:F6} {end,9:F6} {x2,9:F6} {f2,9:F6} ");
+                    Console.WriteLine($"{l,9:F6}");
                 }
                 else if (f1 <= f2)
                 {
@@ -49,15 +51,18 @@ namespace MO_lab1
                     x2 = x1;
                     f2 = f1;
 
-                    Console.Write($"{i_++}) {start:F6} {end:F6} {x1:F6} {f1:F6} ");
-                    Console.WriteLine($"{(length / (end - start)):F6}");
-
+                    double l = (length / (end - start));
+                    
                     length = end - start;
                     x1 = start + (fibNumbers[n - k - 2] / fibNumbers[n - k]) * length;
                     if (k != fibNumbers.Count - 2)
                     {
                         f1 = data.Function.Invoke(x1);
                     }
+                    Console.Write($"{i_++,2}{")",-1} {start,9:F6} {end,9:F6} {x1,9:F6} {f1,9:F6} ");
+                    Console.WriteLine($"{l,9:F6}");
+
+
                 }
 
                 if (k == fibNumbers.Count - 2)

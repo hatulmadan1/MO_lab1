@@ -11,7 +11,7 @@ namespace MO_lab1
             double delta = data.Epsilon * 0.29;
             double start = data.Start, end = data.End;
             double length = end - start;
-            Console.WriteLine($"\n{(Math.Log2((data.End - data.Start) / data.Epsilon)):F} Start    End       x1       x2       f1       f2       l2/l1");
+            Console.WriteLine($"\n{(Math.Log2((data.End - data.Start) / data.Epsilon)),-1:N} {"Start",7} {"End",9} {"x1",9} {"x2",9} {"f1",9} {"f2",9} {"l2/l1",9}");
             int i = 0;
             int precision = GetPrecision(data.Epsilon);
             while (Math.Round(end - start, precision) > data.Epsilon)
@@ -22,7 +22,8 @@ namespace MO_lab1
                 double f1 = data.Function.Invoke(x1);
                 double f2 = data.Function.Invoke(x2);
 
-                Console.Write($"{i++}) {start:F6} {end:F6} {x1:F6} {x2:F6} {f1:F6} {f2:F6} ");
+                Console.Write($"{i++}{")",-1} {start,9:N6} {end,9:N6} {x1,9:N6} {x2,9:N6} {f1,9:N6} {f2,9:N6} ");
+                
 
                 if (f1 >= f2)
                 {
@@ -33,7 +34,7 @@ namespace MO_lab1
                     end = x2;
                 }
 
-                Console.WriteLine($"{(length / (end - start)):F6}");
+                Console.WriteLine($"{(length / (end - start)),9:N6}");
                 
                 length = end - start;
             }
