@@ -27,7 +27,7 @@ namespace MO_lab1
             int i_ = 0;
             int precision = GetPrecision(data.Epsilon);
 
-            while (Math.Round(length, precision) >= data.Epsilon)
+            while (true)
             {
                 if (f1 >= f2)
                 {
@@ -83,7 +83,10 @@ namespace MO_lab1
                     {
                         end = x2;
                     }
+
+                    break;
                 }
+                k++;
             }
 
             Console.WriteLine($"funcCallingCount: {funcCallingCount}");
