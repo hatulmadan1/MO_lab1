@@ -6,7 +6,7 @@ namespace MO_lab1
 {
     public abstract class OptMethod
     {
-        public abstract (double, double) Execute(TestCase data);
+        public abstract (double, double) Execute(TestCase data, Boolean suppressOutput = false);
 
         public static int GetPrecision(double eps)
         {

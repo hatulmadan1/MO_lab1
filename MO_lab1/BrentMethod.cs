@@ -12,6 +12,7 @@ namespace MO_lab1
 
         private (double, double) BrentMethodDeclaration(TestCase tc)
         {
+            var funcCallingCount = 0; 
             var prec = 1e-5;
             var a = tc.Start;
             var c = tc.End;
@@ -20,6 +21,7 @@ namespace MO_lab1
             double u, d, e, x, w, v, fx, fw, fv, K = (3 - Math.Sqrt(5)) / 2;
             x = w = v = (a + c) / 2;
             fx = fw = fv = func.Invoke(x);
+            ++funcCallingCount;
             d = e = c - a;
             var idx = 1;
             u = 0;
@@ -78,6 +80,7 @@ namespace MO_lab1
                 }
 
                 var fu = func.Invoke(u);
+                ++funcCallingCount;
                 if (fu <= fx)
                 {
                     if (u >= x)
@@ -113,7 +116,7 @@ namespace MO_lab1
                 prevAB = c - a;
             }
 
-            Console.WriteLine();
+            Console.WriteLine($"funcCallingCount: {funcCallingCount}");
             return (a, c);
         }
     }

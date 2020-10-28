@@ -6,13 +6,15 @@ namespace MO_lab1
 {
     public class GoldenRatioMethod : OptMethod
     {
-        public override (double, double) Execute(TestCase data)
+        public override (double, double) Execute(TestCase data, Boolean suppressOutput = false)
         {
+            var funcCallingCount = 0; 
             double Fib = (Math.Sqrt(5) - 1) / 2;
             double start = data.Start, end = data.End;
             double length = end - start;
             double x1 = start + Fib * length, x2;
             double f1 = data.Function.Invoke(x1), f2;
+            ++funcCallingCount;
             Console.WriteLine($"\n{Math.Abs(Math.Log((data.End - data.Start) / data.Epsilon) / Math.Log(Fib)),5:N} {"Start",7} {"End",9} {"New x",9} {"New f(x)",9} {"l2/l1",9}");
             int i = 0;
             int precision = GetPrecision(data.Epsilon);
@@ -21,6 +23,7 @@ namespace MO_lab1
                 x2 = end - (x1 - start);
 
                 f2 = data.Function.Invoke(x2);
+                ++funcCallingCount;
 
                 Console.Write($"{i++,2}{")",-1} {start,9:N6} {end,9:N6} {x2,9:N6} {f2,9:N6} ");
 
@@ -51,6 +54,7 @@ namespace MO_lab1
                 length = end - start;
             }
 
+            Console.WriteLine($"funcCallingCount: {funcCallingCount}");
             return (start, end);
         }
     }
