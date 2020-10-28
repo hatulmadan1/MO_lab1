@@ -6,8 +6,9 @@ namespace MO_lab1
 {
     public class FibonacciMethod : OptMethod
     {
-        public override (double, double) Execute(TestCase data)
+        public override (double, double) Execute(TestCase data, Boolean suppressOutput = false)
         {
+            var funcCallingCount = 0; 
             List<double> fibNumbers = new List<double>() {1, 1};
             for (int i = 2; !checkCondition(i, data); i++)
             {
@@ -19,6 +20,7 @@ namespace MO_lab1
             double x1 = start + (fibNumbers[n - 2]/fibNumbers[n])* length, 
                 x2 = start + (fibNumbers[n - 1] / fibNumbers[n]) * length;
             double f1 = data.Function.Invoke(x1), f2 = data.Function.Invoke(x2);
+            funcCallingCount += 2;
             int k = 1;
 
             Console.WriteLine($"\n{n,2:F0} {"Start",10} {"End",9} {"New x",9} {"New f(x)",9} {"l2/l1",9}");
@@ -41,6 +43,7 @@ namespace MO_lab1
                     if (k != fibNumbers.Count - 2)
                     {
                         f2 = data.Function.Invoke(x2);
+                        ++funcCallingCount;
                     }
                     Console.Write($"{i_++,2}{")",-1} {start,9:F6} {end,9:F6} {x2,9:F6} {f2,9:F6} ");
                     Console.WriteLine($"{l,9:F6}");
@@ -58,6 +61,7 @@ namespace MO_lab1
                     if (k != fibNumbers.Count - 2)
                     {
                         f1 = data.Function.Invoke(x1);
+                        ++funcCallingCount;
                     }
                     Console.Write($"{i_++,2}{")",-1} {start,9:F6} {end,9:F6} {x1,9:F6} {f1,9:F6} ");
                     Console.WriteLine($"{l,9:F6}");
@@ -69,6 +73,7 @@ namespace MO_lab1
                 {
                     x2 = x1 + data.Epsilon;
                     f2 = data.Function.Invoke(x2);
+                    ++funcCallingCount;
                     if (f1 == f2)
                     {
                         start = x1;
@@ -81,6 +86,7 @@ namespace MO_lab1
                 }
             }
 
+            Console.WriteLine($"funcCallingCount: {funcCallingCount}");
             return (start, end);
         }
 

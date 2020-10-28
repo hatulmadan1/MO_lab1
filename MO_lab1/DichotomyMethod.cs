@@ -6,8 +6,9 @@ namespace MO_lab1
 {
     public class DichotomyMethod : OptMethod
     {
-        public override (double, double) Execute(TestCase data)
+        public override (double, double) Execute(TestCase data, Boolean suppressOutput = false)
         {
+            var funcCallingCount = 0; 
             double delta = data.Epsilon * 0.29;
             double start = data.Start, end = data.End;
             double length = end - start;
@@ -21,6 +22,7 @@ namespace MO_lab1
 
                 double f1 = data.Function.Invoke(x1);
                 double f2 = data.Function.Invoke(x2);
+                funcCallingCount += 2;
 
                 Console.Write($"{i++}{")",-1} {start,9:N6} {end,9:N6} {x1,9:N6} {x2,9:N6} {f1,9:N6} {f2,9:N6} ");
                 
@@ -39,6 +41,7 @@ namespace MO_lab1
                 length = end - start;
             }
 
+            Console.WriteLine($"funcCallingCount: {funcCallingCount}");
             return (start, end);
         }
     }
